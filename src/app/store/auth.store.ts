@@ -1,5 +1,11 @@
 import { inject } from '@angular/core';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { AuthService } from '../core/auth/auth.service';
 import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -21,6 +27,7 @@ const initialState: AuthState = {
 
 export const AuthStore = signalStore(
   // { protectedState: false }, // make the store mutable
+  { providedIn: 'root' },
   withState(initialState),
   withMethods((store, authService = inject(AuthService)) => {
     function successLogin(username: string): void {
@@ -56,6 +63,7 @@ export const AuthStore = signalStore(
             tap({
               next: (credentials) => {
                 successLogin(credentials.username);
+                console.log(store);
               },
               error: (error) => {
                 failedLogin(error);
@@ -66,5 +74,13 @@ export const AuthStore = signalStore(
       )
     );
     return { login };
+  }),
+  withHooks({
+    onInit(store) {
+      console.log('init store');
+    },
+    onDestroy(store) {
+      console.log('destroy store');
+    },
   })
 );
