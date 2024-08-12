@@ -10,6 +10,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Credentials } from '../core/auth/auth.model';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
 type AuthState = {
   isLoading: boolean;
@@ -28,6 +29,7 @@ const initialState: AuthState = {
 export const AuthStore = signalStore(
   // { protectedState: false }, // make the store mutable
   { providedIn: 'root' },
+  withDevtools('auth'),
   withState(initialState),
   withMethods((store, authService = inject(AuthService)) => {
     function successLogin(username: string): void {
@@ -66,7 +68,7 @@ export const AuthStore = signalStore(
                 console.log(store);
               },
               error: (error) => {
-                failedLogin(error);
+                failedLogin(error.message);
               },
             })
           )
