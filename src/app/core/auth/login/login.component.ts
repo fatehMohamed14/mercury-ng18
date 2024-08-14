@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { AuthStore } from '../../../store/auth.store';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@ngbracket/ngx-layout';
@@ -20,6 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { Credentials } from '../auth.model';
 
 @Component({
   selector: 'moh-login',
@@ -46,10 +48,21 @@ import { MatOptionModule } from '@angular/material/core';
 })
 export class LoginComponent implements OnInit {
   readonly store = inject(AuthStore);
-
+  readonly router = inject(Router);
+  constructor() {
+    effect(() => {
+      if (this.store.isLoggedIn()) this.router.navigateByUrl('/planet/list');
+    });
+  }
   loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    username: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   get f() {
@@ -57,10 +70,10 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.loginForm.value);
+    this.store.login(this.loginForm.getRawValue());
   }
 
   ngOnInit(): void {
-    this.store.login({ username: 'admin', password: 'P@ssw0rd' });
+    //
   }
 }

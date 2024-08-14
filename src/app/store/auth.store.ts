@@ -49,7 +49,7 @@ export const AuthStore = signalStore(
         error,
       }));
     }
-    function LoggedOut(): void {
+    function logOut(): void {
       patchState(store, (state) => ({
         ...state,
         isLoading: false,
@@ -65,7 +65,6 @@ export const AuthStore = signalStore(
             tap({
               next: (credentials) => {
                 successLogin(credentials.username);
-                console.log(store);
               },
               error: (error) => {
                 failedLogin(error.message);
@@ -75,7 +74,7 @@ export const AuthStore = signalStore(
         )
       )
     );
-    return { login };
+    return { login, logOut };
   }),
   withHooks({
     onInit(store) {

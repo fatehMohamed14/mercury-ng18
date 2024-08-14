@@ -43,7 +43,7 @@
           fxflex="100"
           mat-raised-button
           color="primary"
-          [disabled]="!loginForm.valid"
+          [disabled]="!loginForm.valid || store.isLoading()"
         >
           Login
         </button>
