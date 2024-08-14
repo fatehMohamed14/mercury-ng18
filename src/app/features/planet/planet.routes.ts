@@ -1,10 +1,4 @@
-import {
-  provideHttpClient,
-  withInterceptors,
-  withRequestsMadeViaParent,
-} from '@angular/common/http';
 import { Routes } from '@angular/router';
-import { planetInterceptor } from './interceptors/planet.interceptor';
 
 export const PLANET_ROUTES: Routes = [
   {
@@ -14,7 +8,7 @@ export const PLANET_ROUTES: Routes = [
   },
   {
     path: '',
-    redirectTo: '/list',
+    redirectTo: '/planet/list',
     pathMatch: 'full',
   },
 ];

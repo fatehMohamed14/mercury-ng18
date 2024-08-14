@@ -13,3 +13,12 @@ mat-card {
 mat-form-field {
   display: block;
 }
+
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > div {
+    font-size: large;
+  }
+}

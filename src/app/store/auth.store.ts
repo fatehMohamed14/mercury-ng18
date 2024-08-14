@@ -10,7 +10,10 @@ import { AuthService } from '../core/auth/auth.service';
 import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Credentials } from '../core/auth/auth.model';
-import { withDevtools } from '@angular-architects/ngrx-toolkit';
+import {
+  withDevtools,
+  withStorageSync,
+} from '@angular-architects/ngrx-toolkit';
 
 type AuthState = {
   isLoading: boolean;
@@ -29,6 +32,11 @@ const initialState: AuthState = {
 export const AuthStore = signalStore(
   // { protectedState: false }, // make the store mutable
   { providedIn: 'root' },
+  withStorageSync({
+    key: 'auth',
+    autoSync: true,
+    storage: () => localStorage,
+  }),
   withDevtools('auth'),
   withState(initialState),
   withMethods((store, authService = inject(AuthService)) => {
@@ -60,11 +68,14 @@ export const AuthStore = signalStore(
     // login api call
     const login = rxMethod<Credentials>(
       pipe(
+        tap((_) => patchState(store, { isLoading: true })),
         switchMap((credentials) =>
           authService.login$(credentials).pipe(
             tap({
               next: (credentials) => {
-                successLogin(credentials.username);
+                setTimeout(() => {
+                  successLogin(credentials.username);
+                }, 2000);
               },
               error: (error) => {
                 failedLogin(error.message);

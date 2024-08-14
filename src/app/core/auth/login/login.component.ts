@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Credentials } from '../auth.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'moh-login',
@@ -42,6 +43,7 @@ import { Credentials } from '../auth.model';
     MatOptionModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

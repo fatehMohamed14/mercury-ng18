@@ -24,7 +24,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/auth/login',
+    redirectTo: '/planet/list',
     pathMatch: 'full',
   },
 ];

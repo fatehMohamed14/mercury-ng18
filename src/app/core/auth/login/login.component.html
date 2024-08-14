@@ -8,7 +8,20 @@
   <mat-card>
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="submit()" fxLayout="column">
-        <h2>Log In</h2>
+        <div class="card-title">
+          <mat-icon
+            style="
+              color: purple;
+              font-size: 44px;
+              width: 44px;
+              height: 44px;
+              margin-left: 1rem;
+            "
+            >rocket</mat-icon
+          >
+          <div>Welcome to the solar system</div>
+        </div>
+        <hr />
         @if (false) {
         <mat-error> The username and password were not recognized </mat-error>
         }
@@ -45,7 +58,10 @@
           color="primary"
           [disabled]="!loginForm.valid || store.isLoading()"
         >
-          Login
+          @if(store.isLoading()) {
+          <mat-icon><mat-spinner diameter="18"> </mat-spinner></mat-icon>
+
+          } @else { Fly }
         </button>
       </form>
     </mat-card-content>
