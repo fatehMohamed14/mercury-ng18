@@ -3,6 +3,7 @@ import { authChildGuard, authGuard } from './core/auth/auth.guard';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { planetInterceptor } from './features/planet/interceptors/planet.interceptor';
 import { PlanetService } from './features/planet/planet.service';
+import { LayoutComponent } from './shared/layout/layout.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'planet',
+    component: LayoutComponent,
     loadChildren: () =>
       import('./features/planet/planet.routes').then(
         (routes) => routes.PLANET_ROUTES
