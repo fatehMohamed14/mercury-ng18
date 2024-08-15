@@ -12,10 +12,6 @@
   margin: 1em;
 }
 
-.center-flex {
-  display: inline-flex;
-}
-
 .navbar-container {
   display: flex;
   flex-direction: column;
@@ -37,9 +33,6 @@
              causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
   flex: 1;
 }
-.sidenav-content {
-  padding: 1em;
-}
 
 .navbar-is-mobile .navbar-sidenav-container {
   /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
@@ -57,10 +50,6 @@ mat-sidenav {
 }
 
 /* Set height of wrapper to stop content from moving up & down */
-
-.progress-bar-container {
-  height: 5px;
-}
 
 a.mat-list-item.active {
   background: rgba(0, 0, 0, 0.04);

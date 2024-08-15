@@ -1,2 +1,40 @@
-<p>planets works!</p>
-{{ planetStore.planets().length }} Planets found
+@if(planetStore.isLoading()) {
+<div class="progress-bar-container">
+  <mat-progress-bar color="primary" mode="indeterminate"> </mat-progress-bar>
+  <!-- <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner> -->
+</div>
+}
+<div
+  class="container"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutGap="0.5%"
+  fxLayoutAlign="center"
+>
+  @for (planet of planetStore.planets(); track planet.name) {
+
+  <mat-card fxFlex="40%" class="planet-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ planet.englishName }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        Discovered by: <b>{{ planet.discoveredBy }}</b>
+      </div>
+    </mat-card-content>
+
+    <mat-card-footer class="card-footer">
+      <mat-card-header>
+        <mat-card-title>Moons ({{ planet.moons?.length || 0 }})</mat-card-title>
+      </mat-card-header>
+      <mat-chip-set aria-label="planet-moons">
+        @for (moon of planet.moons?.slice(0, 3); track moon.moon) {
+        <mat-chip>{{ moon.moon }}</mat-chip>
+        } @empty {
+        <mat-chip>No moons</mat-chip>
+        }
+      </mat-chip-set>
+    </mat-card-footer>
+  </mat-card>
+  }
+</div>
