@@ -5,6 +5,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { FlexLayoutModule } from '@ngbracket/ngx-layout';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'moh-planets',
@@ -15,6 +16,7 @@ import { FlexLayoutModule } from '@ngbracket/ngx-layout';
     MatCardModule,
     MatChipsModule,
     FlexLayoutModule,
+    MatDividerModule,
   ],
   providers: [PlanetStore],
   templateUrl: './planets.component.html',
