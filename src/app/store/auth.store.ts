@@ -14,6 +14,7 @@ import {
   withDevtools,
   withStorageSync,
 } from '@angular-architects/ngrx-toolkit';
+import { Router } from '@angular/router';
 
 type AuthState = {
   isLoading: boolean;
@@ -39,54 +40,57 @@ export const AuthStore = signalStore(
   }),
   withDevtools('auth'),
   withState(initialState),
-  withMethods((store, authService = inject(AuthService)) => {
-    function successLogin(username: string): void {
-      patchState(store, (state) => ({
-        ...state,
-        isLoading: false,
-        isLoggedIn: true,
-        username,
-        error: '',
-      }));
-    }
-    function failedLogin(error: string): void {
-      patchState(store, (state) => ({
-        ...state,
-        isLoading: false,
-        isLoggedIn: false,
-        error,
-      }));
-    }
-    function logOut(): void {
-      patchState(store, (state) => ({
-        ...state,
-        isLoading: false,
-        isLoggedIn: false,
-        username: '',
-      }));
-    }
-    // login api call
-    const login = rxMethod<Credentials>(
-      pipe(
-        tap((_) => patchState(store, { isLoading: true })),
-        switchMap((credentials) =>
-          authService.login$(credentials).pipe(
-            tap({
-              next: (credentials) => {
-                setTimeout(() => {
-                  successLogin(credentials.username);
-                }, 2000);
-              },
-              error: (error) => {
-                failedLogin(error.message);
-              },
-            })
+  withMethods(
+    (store, authService = inject(AuthService), router = inject(Router)) => {
+      function successLogin(username: string): void {
+        patchState(store, (state) => ({
+          ...state,
+          isLoading: false,
+          isLoggedIn: true,
+          username,
+          error: '',
+        }));
+      }
+      function failedLogin(error: string): void {
+        patchState(store, (state) => ({
+          ...state,
+          isLoading: false,
+          isLoggedIn: false,
+          error,
+        }));
+      }
+      function logOut(): void {
+        patchState(store, (state) => ({
+          ...state,
+          isLoading: false,
+          isLoggedIn: false,
+          username: '',
+        }));
+        router.navigateByUrl('/auth/login');
+      }
+      // login api call
+      const login = rxMethod<Credentials>(
+        pipe(
+          tap((_) => patchState(store, { isLoading: true })),
+          switchMap((credentials) =>
+            authService.login$(credentials).pipe(
+              tap({
+                next: (credentials) => {
+                  setTimeout(() => {
+                    successLogin(credentials.username);
+                  }, 2000);
+                },
+                error: (error) => {
+                  failedLogin(error.message);
+                },
+              })
+            )
           )
         )
-      )
-    );
-    return { login, logOut };
-  }),
+      );
+      return { login, logOut };
+    }
+  ),
   withHooks({
     onInit(store) {
       console.log('init store');

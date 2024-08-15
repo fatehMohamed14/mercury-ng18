@@ -4,6 +4,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  effect,
   inject,
   OnDestroy,
 } from '@angular/core';
@@ -12,7 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthStore } from '../../store/auth.store';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -40,6 +41,7 @@ export class LayoutComponent implements OnDestroy, AfterViewInit {
   readonly authStore = inject(AuthStore);
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
+  readonly router = inject(Router);
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher
