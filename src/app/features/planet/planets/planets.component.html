@@ -29,7 +29,11 @@
       </mat-card-header>
       <mat-chip-set aria-label="planet-moons">
         @for (moon of planet.moons?.slice(0, 3); track moon.moon) {
-        <mat-chip>{{ moon.moon }}</mat-chip>
+        <mat-chip>
+          <img matChipAvatar src="assets/images/moon.png" alt="planet moon" />{{
+            moon.moon
+          }}</mat-chip
+        >
         } @empty {
         <mat-chip>No moons</mat-chip>
         }

@@ -6,7 +6,7 @@ export interface Planet {
   name: string;
   englishName: string;
   isPlanet: boolean;
-  moons: Moon[];
+  moons?: Moon[];
   semimajorAxis: number;
   perihelion: number;
   aphelion: number;
