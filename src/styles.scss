@@ -18,12 +18,14 @@ $my-app-theme: mat.m2-define-light-theme(
 );
 
 @include mat.all-component-themes($my-app-theme);
-:root {
-  --mat-list-active-indicator-shape: 0;
-}
 
 html,
 body {
+  --mat-list-active-indicator-shape: 0;
+  --mat-list-active-indicator-color: mat.m2-get-color-from-palette(
+    $my-app-primary,
+    500
+  );
   height: 100%;
 }
 body {
@@ -31,5 +33,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .mdc-list-item--activated {
-  border-left: 2px solid mat.m2-get-color-from-palette($my-app-primary, 900);
+  border-left: 4px solid mat.m2-get-color-from-palette($my-app-primary, 600);
+}
+.mat-mdc-list-item.mdc-list-item--activated {
+  background-color: mat.m2-get-color-from-palette(
+    $my-app-primary,
+    100
+  ) !important;
 }

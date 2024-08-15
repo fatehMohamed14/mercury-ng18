@@ -47,10 +47,21 @@
           mat-list-item
           [routerLink]="['/planet/list']"
           routerLinkActive
-          #rla="routerLinkActive"
-          [activated]="rla.isActive"
+          #planets="routerLinkActive"
+          [activated]="planets.isActive"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           Planets
+        </a>
+        <a
+          mat-list-item
+          [routerLink]="['/bodies/list']"
+          routerLinkActive
+          #otherBodies="routerLinkActive"
+          [activated]="otherBodies.isActive"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Other bodies
         </a>
       </mat-nav-list>
     </mat-sidenav>
