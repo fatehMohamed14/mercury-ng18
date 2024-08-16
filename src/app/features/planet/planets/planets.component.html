@@ -23,7 +23,7 @@
 >
   @for (planet of planetStore.planets(); track planet.name) {
 
-  <mat-card fxFlex="40%" class="planet-card" appearance="outlined">
+  <mat-card @items fxFlex="40%" class="planet-card" appearance="outlined">
     <mat-card-header>
       <mat-card-title>{{ planet.englishName }}</mat-card-title>
     </mat-card-header>
