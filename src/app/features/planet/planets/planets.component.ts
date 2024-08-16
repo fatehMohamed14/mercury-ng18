@@ -31,11 +31,8 @@ import {
   animations: [
     trigger('items', [
       transition(':enter', [
-        style({ transform: 'scale(0.5)', opacity: 0 }), // initial
-        animate(
-          '0.2s cubic-bezier(0.0, 0.0, 1.0, 1.0)',
-          style({ transform: 'scale(1)', opacity: 1 })
-        ), // final
+        style({ opacity: 0, height: 0 }),
+        animate(200, style({ opacity: 1, height: 'fit-content' })),
       ]),
     ]),
   ],
