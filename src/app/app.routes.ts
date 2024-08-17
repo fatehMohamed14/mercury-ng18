@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authChildGuard, authGuard } from './core/auth/auth.guard';
+import { authChildGuard } from './core/auth/auth.guard';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { planetInterceptor } from './features/planet/interceptors/planet.interceptor';
 import { PlanetService } from './features/planet/planet.service';

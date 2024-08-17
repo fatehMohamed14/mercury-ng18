@@ -18,7 +18,6 @@ import {
   selector: 'moh-planets',
   standalone: true,
   imports: [
-    CommonModule,
     MatProgressBarModule,
     MatCardModule,
     MatChipsModule,

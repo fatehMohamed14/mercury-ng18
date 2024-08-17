@@ -1,7 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Credentials } from './auth.model';
 import { of, throwError } from 'rxjs';
-import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',

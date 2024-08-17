@@ -21,26 +21,18 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { Router } from '@angular/router';
-import { Credentials } from '../auth.model';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'moh-login',
   standalone: true,
   imports: [
-    CommonModule,
     FlexLayoutModule,
     FormsModule,
-    MatToolbarModule,
     MatInputModule,
     MatCardModule,
-    MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatTableModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatOptionModule,
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,

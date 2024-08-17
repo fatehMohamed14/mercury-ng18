@@ -7,7 +7,7 @@ import {
   withState,
 } from '@ngrx/signals';
 import { AuthService } from '../core/auth/auth.service';
-import { Observable, pipe, switchMap, tap } from 'rxjs';
+import { pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Credentials } from '../core/auth/auth.model';
 import {
